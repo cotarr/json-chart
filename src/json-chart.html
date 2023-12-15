@@ -1,0 +1,53 @@
+<!-- HTML template to be inserted into index.html for use with associated web component  -->
+<template id='jsonChartTemplate'>
+  <style>
+    .chart-title {
+      text-align: center;
+      font-size: 125%;
+    }
+    .chart-subtitle {
+      text-align: center;
+      font-size: 80%;
+    }
+
+    .grid-wrapper {
+      display: grid;
+    }
+    .grid-box11 {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      width: 1em;
+    }
+    .grid-box12 {
+      grid-column-start: 2;
+      grid-column-end: 3;
+    }
+    .left-axis-title {
+      writing-mode: vertical-rl;
+      text-align: center;
+    }
+    .bottom-axis-title {
+      text-align: center;
+    }
+    .chart-container {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+  </style>
+  <div class='elem-container' id='elemContainer'>
+    <div class='chart-title' id='chartTitle'>Chart Title</div>
+    <div class='chart-subtitle' id='chartSubtitle'>chart footer</div>
+
+    <div class="grid-wrapper">
+      <div id="leftAxisTitleId" class="grid-box11 left-axis-title" ></div>
+      <div id="chartContainer" class="grid-box12 chart-div" >
+        <canvas id='canvasElementId'></canvas>
+      </div>
+    </div>
+
+    <div id="bottomRulerTitleId" class="bottom-axis-title"></div>
+  </div>
+</template>

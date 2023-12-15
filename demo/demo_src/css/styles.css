@@ -1,0 +1,21 @@
+html {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+body {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  background-color: #cccccc;
+}
+.chart-enclosing-div {
+  padding-left: 10px;
+  padding-right: 25px;
+}
+.page-content {
+  margin: 10px 20px 10px 20px;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding-left: 10px;
+}
