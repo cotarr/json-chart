@@ -1,4 +1,4 @@
-// json-chart.js v1.0.0
+// json-chart.js v1.0.1
 //
 //       HTML Canvas layout
 //
@@ -86,7 +86,11 @@
     // canvas element to fill the page without scrolling.
     //
     get verticalPaddingPx () {
-      return parseInt(this.getAttribute('vertical-padding-px'));
+      if (this.hasAttribute('vertical-padding-px')) {
+        return parseInt(this.getAttribute('vertical-padding-px'));
+      } else {
+        return null;
+      }
     }
 
     set verticalPaddingPx (val) {
@@ -94,7 +98,11 @@
     }
 
     get vertAxisMinRange () {
-      return parseFloat(this.getAttribute('vert-axis-min-range'));
+      if (this.hasAttribute('vert-axis-min-range')) {
+        return parseFloat(this.getAttribute('vert-axis-min-range'));
+      } else {
+        return null;
+      }
     }
 
     set vertAxisMinRange (val) {
@@ -102,7 +110,11 @@
     }
 
     get vertAxisMaxRange () {
-      return parseFloat(this.getAttribute('vert-axis-max-range'));
+      if (this.hasAttribute('vert-axis-max-range')) {
+        return parseFloat(this.getAttribute('vert-axis-max-range'));
+      } else {
+        return null;
+      }
     }
 
     set vertAxisMaxRange (val) {
@@ -110,7 +122,11 @@
     }
 
     get chartWidthSeconds () {
-      return parseInt(this.getAttribute('chart-width-seconds'));
+      if (this.hasAttribute('chart-width-seconds')) {
+        return parseInt(this.getAttribute('chart-width-seconds'));
+      } else {
+        return null;
+      }
     }
 
     // Set property null to remove attribute)
@@ -123,7 +139,11 @@
     }
 
     get timestampExpirySeconds () {
-      return parseInt(this.getAttribute('timestamp-expiry-seconds'));
+      if (this.hasAttribute('timestamp-expiry-seconds')) {
+        return parseInt(this.getAttribute('timestamp-expiry-seconds'));
+      } else {
+        return null;
+      }
     }
 
     // Set property null to remove attribute)
@@ -139,13 +159,13 @@
     // As attribute "line,step,fill"
     get plotLineModes () {
       let modesArray = null;
-      if (this.getAttribute('plot-line-modes')) {
+      if (this.hasAttribute('plot-line-modes')) {
         const modesStr = this.getAttribute('plot-line-modes').toLowerCase();
         if ((modesStr) && (modesStr.length > 0)) {
           modesArray = modesStr.split(',');
         }
       }
-      console.log('modesArray', JSON.stringify(modesArray));
+      // console.log('modesArray', JSON.stringify(modesArray));
       return modesArray;
     }
 
@@ -169,13 +189,13 @@
     // Format, as attribute:  "#ffffff,#ffffff"
     get plotLineColors () {
       let colorsArray = null;
-      if (this.getAttribute('plot-line-colors')) {
+      if (this.hasAttribute('plot-line-colors')) {
         const colorsStr = this.getAttribute('plot-line-colors').toLowerCase();
         if ((colorsStr) && (colorsStr.length > 0)) {
           colorsArray = colorsStr.split(',');
         }
       }
-      console.log('colorsArray', JSON.stringify(colorsArray));
+      // console.log('colorsArray', JSON.stringify(colorsArray));
       return colorsArray;
     }
 
@@ -260,7 +280,11 @@
     }
 
     get leftRulerWidth () {
-      return parseInt(this.getAttribute('left-ruler-width'));
+      if (this.hasAttribute('left-ruler-width')) {
+        return parseInt(this.getAttribute('left-ruler-width'));
+      } else {
+        return null;
+      }
     }
 
     set leftRulerWidth (val) {
@@ -285,7 +309,7 @@
       if ((labelStr) && (labelStr.length > 0) && (labelStr.indexOf(',') >= 0)) {
         labelArray = labelStr.split(',');
       }
-      console.log('labelArray', JSON.stringify(labelArray));
+      // console.log('labelArray', JSON.stringify(labelArray));
       return labelArray;
     }
 
@@ -319,7 +343,11 @@
     }
 
     get bottomRulerHeight () {
-      return parseInt(this.getAttribute('bottom-ruler-height'));
+      if (this.hasAttribute('bottom-ruler-height')) {
+        return parseInt(this.getAttribute('bottom-ruler-height'));
+      } else {
+        return null;
+      }
     }
 
     set bottomRulerHeight (val) {
@@ -331,7 +359,11 @@
     }
 
     get bottomRulerMode () {
-      return this.getAttribute('bottom-ruler-mode');
+      if (this.hasAttribute('bottom-ruler-mode')) {
+        return this.getAttribute('bottom-ruler-mode');
+      } else {
+        return null;
+      }
     }
 
     set bottomRulerMode (val) {
@@ -343,7 +375,11 @@
     }
 
     get minimumCanvasHeight () {
-      return parseInt(this.getAttribute('minimum-canvas-height'));
+      if (this.hasAttribute('minimum-canvas-height')) {
+        return parseInt(this.getAttribute('minimum-canvas-height'));
+      } else {
+        return null;
+      }
     }
 
     set minimumCanvasHeight (val) {
@@ -355,7 +391,11 @@
     }
 
     get maximumCanvasHeight () {
-      return parseInt(this.getAttribute('maximum-canvas-height'));
+      if (this.hasAttribute('maximum-canvas-height')) {
+        return parseInt(this.getAttribute('maximum-canvas-height'));
+      } else {
+        return null;
+      }
     }
 
     set maximumCanvasHeight (val) {
@@ -367,7 +407,11 @@
     }
 
     get minimumCanvasWidth () {
-      return parseInt(this.getAttribute('minimum-canvas-width'));
+      if (this.hasAttribute('minimum-canvas-width')) {
+        return parseInt(this.getAttribute('minimum-canvas-width'));
+      } else {
+        return null;
+      }
     }
 
     set minimumCanvasWidth (val) {
@@ -379,7 +423,11 @@
     }
 
     get maximumCanvasWidth () {
-      return parseInt(this.getAttribute('maximum-canvas-width'));
+      if (this.hasAttribute('maximum-canvas-width')) {
+        return parseInt(this.getAttribute('maximum-canvas-width'));
+      } else {
+        return null;
+      }
     }
 
     set maximumCanvasWidth (val) {
@@ -393,6 +441,8 @@
     get sort () {
       if (this.hasAttribute('sort')) {
         return this.getAttribute('sort');
+      } else {
+        return null;
       }
     }
 
@@ -965,6 +1015,8 @@
         canvasMap.timeRangeAtLeft = canvasMap.timeRangeAtRight -
           parseInt(this.getAttribute('chart-width-seconds'));
       }
+
+      // console.log(JSON.stringify(canvasMap, null, 2));
 
       this._generateLeftRuler(context, canvasMap, leftRulerLabelArray);
 

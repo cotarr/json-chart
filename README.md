@@ -111,8 +111,8 @@ This can be done several ways.
 
 There are two different methods to add the web component.
 
-- Method 1 - Insert the "<json-chart>" tag into the html file as html with configuration settings as attributes.
-- Method 2 - Programmatically create the "json-chart" element with configuration settings as object properties.
+- Method 1 - Insert the `<json-chart>` tag into the html file as html with configuration settings as attributes.
+- Method 2 - Programmatically create the `json-chart` element with configuration settings as object properties.
 
 ### Method 1 - Insert chart using HTML (Example)
 
@@ -181,8 +181,15 @@ Each data value is an array of 2 or more elements (array of arrays)
 The first element is a timestamp in unix seconds as an integer.
 The second element is a floating point number.
 Additional elements are optional which can be used to plot multiple lines on one chart.
+The initializePlugin(data) function may be called again to update
+a chart with new (different) data.
 
 ### Properties and Attributes
+
+Req = Required, Opt = Optional
+
+Multi-value properties (array) are serialized into a single string with comma (,) as 
+delimiter when converted to an attribute. (See table description below)
 
 |  Object Property        | HTML Attribute             | Type | Description                                |
 | ----------------------- | -------------------------- | ---- | ------------------------------------------ | 
