@@ -1,4 +1,4 @@
-// json-chart.js v1.0.1
+// json-chart.js v1.0.2
 //
 //       HTML Canvas layout
 //
@@ -44,6 +44,7 @@
       this.attachShadow({ mode: 'open' })
         .appendChild(templateContent.cloneNode(true));
       this.dataArray = [];
+      this.dataSubmitTimestamp = null;
       this.widthBreakpoint = 500;
       this.monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
         'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -645,7 +646,7 @@
         if (hourSpacingPx(prevInterval) < 50) prevInterval = 12;
         if (hourSpacingPx(prevInterval) < 50) prevInterval = 24;
 
-        previousJsTime = new Date(canvasMap.timeNowSeconds * 1000);
+        previousJsTime = new Date(canvasMap.chartCreateTimestamp * 1000);
         previousJsTime.setMilliseconds(0);
         previousJsTime.setSeconds(0);
         previousJsTime.setMinutes(0);
@@ -676,7 +677,7 @@
         if (daySpacingPx(prevInterval) < 50) prevInterval = 7;
         if (daySpacingPx(prevInterval) < 50) prevInterval = 15;
 
-        previousJsTime = new Date(canvasMap.timeNowSeconds * 1000);
+        previousJsTime = new Date(canvasMap.chartCreateTimestamp * 1000);
         previousJsTime.setMilliseconds(0);
         previousJsTime.setSeconds(0);
         previousJsTime.setMinutes(0);
@@ -713,7 +714,7 @@
         if (monthSpacingPx(prevInterval) < 50) prevInterval = 24;
         if (monthSpacingPx(prevInterval) < 50) prevInterval = 48;
 
-        previousJsTime = new Date(canvasMap.timeNowSeconds * 1000);
+        previousJsTime = new Date(canvasMap.chartCreateTimestamp * 1000);
         previousJsTime.setMilliseconds(0);
         previousJsTime.setSeconds(0);
         previousJsTime.setMinutes(0);
@@ -843,7 +844,7 @@
      */
     buildChart () {
       const canvasMap = {
-        timeNowSeconds: Math.floor(Date.now() / 1000),
+        chartCreateTimestamp: this.dataSubmitTimestamp,
         rulerFont: '12px arial',
         verticalPadding: 0,
         canvasWidthPx: 0,
@@ -855,6 +856,11 @@
         timeRangeAtLeft: 0,
         timeRangeAtRight: 0
       };
+
+      // Case of build called without data timestamp, use clock
+      if (canvasMap.chartCreateTimestamp == null) {
+        canvasMap.chartCreateTimestamp = Math.floor(Date.now() / 1000);
+      }
 
       // size to page, allow room for buttons and title
       // This is provided by the parent web page to define the height of the canvas
@@ -1005,9 +1011,9 @@
         canvasMap.bottomRulerHeightPx = parseInt(this.getAttribute('bottom-ruler-height'));
       }
 
-      canvasMap.timeRangeAtRight = canvasMap.timeNowSeconds;
+      canvasMap.timeRangeAtRight = canvasMap.chartCreateTimestamp;
       // default to be overwritten
-      canvasMap.timeRangeAtLeft = canvasMap.timeNowSeconds;
+      canvasMap.timeRangeAtLeft = canvasMap.chartCreateTimestamp;
       if ((this.dataArray) && (this.dataArray.length >= 0) && (this.dataArray[0].length > 0)) {
         canvasMap.timeRangeAtLeft = this.dataArray[0][0];
       }
@@ -1147,6 +1153,7 @@
       // TODO sort and range check
       //
       this.dataArray = [];
+      this.dataSubmitTimestamp = Math.floor(Date.now() / 1000);
 
       let sort = true;
       if ((this.hasAttribute('sort')) &&
